@@ -1,0 +1,19 @@
+﻿@model Example_Logic.Models.TBook
+@{
+	ViewBag.Title = "Book";
+}
+
+<h2>BOOK</h2>
+@using (Html.BeginForm())
+{
+	<div>@Html.LabelFor(m =>m.ID) @Html.Label(@Model.ID.ToString())</div>
+	<div>@Html.LabelFor(m =>m.Name) @Html.EditorFor(m=>m.Name)</div>
+	<div>@Html.LabelFor(m =>m.Description) @Html.EditorFor(m=>m.Description)</div>
+	<br />
+	<br />
+	<br />
+	<br />
+	<p>
+		@Html.ActionLink("<<<<", "HomeDisplay", new { bookName = Model.Name })
+	</p>
+}

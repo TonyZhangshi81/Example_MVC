@@ -1,0 +1,83 @@
+﻿@using Example_Logic.Models;
+@{
+	ViewBag.Title = "Display";
+}
+
+<script type="text/javascript">
+
+	$(document).ready(function () {
+		init();
+	});
+
+	function init() {
+		$('#divDialate').attr("style", "display:blank;");
+	}
+
+	function dolnk(id) {
+		//$('#divDialate').toggle();
+
+		$.ajax({
+			url: "http://localhost/Example_API/BookService.svc/GetData",
+			type: "POST",
+			contentType: "text/json",
+			data: '{"id":' + id + '}',
+			dataType: "json",
+			success: function (result) {
+				var info = JSON.parse(result);
+				alert(info.Name);
+			},
+			error: function (XMLHttpRequest, textStatus, errorThrown) {
+				alert(XMLHttpRequest.status);
+				alert(XMLHttpRequest.readyState);
+				alert(textStatus);
+			}
+		});
+
+		return false;
+	}
+
+</script>
+
+<h2>@ViewBag.Message</h2>
+
+<table class="table table-hover">
+	<thead>
+		<tr>
+			<th>#</th>
+			<th>名字</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var book in ViewData["books"] as List<TBook>)
+  {
+			<tr>
+				<td>
+					@Html.ActionLink(book.ID.ToString(), "ToBook", new { openid = book.ID }) |
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => book.Name) |
+				</td>
+				<td>
+					<a id="lnk" onclick="return dolnk(@book.ID.ToString())">SHOW</a>
+				</td>
+			</tr>
+  }
+	</tbody>
+</table>
+<div id="divDialate">
+	<h2>BOOK</h2>
+
+	<label>ID</label>
+	<label id="lblID"></label>
+	<br />
+	<label>Name</label>
+	<label id="lblName"></label>
+	<br />
+	<label>Description</label>
+	<label id="lblDescription"></label>
+</div>
+
+<br />
+<p>
+	@Html.ActionLink("<<<<", "Index", "Home")
+</p>

@@ -1,0 +1,78 @@
+﻿@{
+	ViewBag.Title = "Index";
+}
+<script type="text/javascript">
+
+    $(document).ready(function () {
+		controlEvent();
+	});
+
+	function controlEvent() {
+		$('#btsubmit').click(function () { return submit(); });
+	}
+
+    function submit() {
+		$.ajax({
+            url: "/Example_MVC/Home/DisplayMsg",
+            dataType: "text",
+			type: "POST",
+			data: { "name": $('#txtName').val() },
+			success: function (result) {
+                var obj = JSON.parse(result);
+				alert(obj.Message);
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                alert(XMLHttpRequest.status);
+                alert(XMLHttpRequest.readyState);
+                alert(textStatus);
+            }
+		});
+		return false;
+	}
+
+</script>
+
+@using (Html.BeginForm("Index", "Home", FormMethod.Post))
+{ 
+	<h2>@ViewBag.Message</h2>
+	<span>Input:</span>
+	@Html.TextBox("txtName")
+	<input type="button" value="submit" id="btsubmit" />
+	<br />
+	<input type="submit" value="NEXT" name="commandName" />
+	
+	<br />
+	<br />
+	<span>BOOK NAME:</span>
+	@Html.TextBox("txtBookName")
+	<input type="submit" value="SHOW" name="commandName" />
+	
+	
+	<br />
+	<br />
+	<p>
+		@Html.ActionLink("待审核", "Index", "Console") |
+
+		@Html.ActionLink("已上墙", "Index", "Accept") |
+
+		@Html.ActionLink("未通过", "Index", "Refuse")
+	</p>
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	@Html.ActionLink("跳转到About页面", "About", new
+	{
+		id = 2,
+		type = "about"
+	})
+
+	
+	
+
+}
+
