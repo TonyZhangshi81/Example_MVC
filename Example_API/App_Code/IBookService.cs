@@ -27,7 +27,7 @@ namespace Example_MVC
 		/// <param name="id"></param>
 		/// <returns></returns>
 		[OperationContract]
-		[WebInvoke(UriTemplate = "/GetData", Method = "POST", BodyStyle = WebMessageBodyStyle.Bare, ResponseFormat = WebMessageFormat.Json)]
+		[WebInvoke(UriTemplate = "/GetData", Method = "POST", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Json)]
 		BookInfo GetData(int id);
 
 		/// <summary>

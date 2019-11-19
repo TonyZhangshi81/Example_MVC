@@ -1,83 +1,96 @@
 ﻿@using Example_Logic.Models;
 @{
-	ViewBag.Title = "Display";
+    ViewBag.Title = "Display";
 }
 
 <script type="text/javascript">
 
-	$(document).ready(function () {
-		init();
-	});
+    $(document).ready(function () {
+        init();
+    });
 
-	function init() {
-		$('#divDialate').attr("style", "display:blank;");
-	}
+    function init() {
+        $('#divDialate').attr("style", "display:none;");
+    }
 
-	function dolnk(id) {
-		//$('#divDialate').toggle();
+    function dolnk(id) {
+        $('#divDialate').attr("style", "display:blank;");
 
-		$.ajax({
-			url: "http://localhost/Example_API/BookService.svc/GetData",
-			type: "POST",
-			contentType: "text/json",
-			data: '{"id":' + id + '}',
-			dataType: "json",
-			success: function (result) {
-				var info = JSON.parse(result);
-				alert(info.Name);
-			},
-			error: function (XMLHttpRequest, textStatus, errorThrown) {
-				alert(XMLHttpRequest.status);
-				alert(XMLHttpRequest.readyState);
-				alert(textStatus);
-			}
-		});
+        $.ajax({
+            url: "http://localhost/BookServer/BookService.svc/GetData",
+            type: "POST",
+            contentType: "text/json",
+            data: '{"id":' + id + '}',
+            dataType: "json",
+            success: function (result) {
+                if (result == null) {
+                    alert('no book!');
+                    return;
+                }
+                var info = result.GetDataResult;
+                $('#lblID').text(info.ID);
+                $('#lblName').text(info.Name);
+                $('#lblDescription').text(info.Description);
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                alert(XMLHttpRequest.status);
+                alert(XMLHttpRequest.readyState);
+                alert(textStatus);
+            }
+        });
 
-		return false;
-	}
+        return false;
+    }
 
 </script>
 
 <h2>@ViewBag.Message</h2>
 
-<table class="table table-hover">
-	<thead>
-		<tr>
-			<th>#</th>
-			<th>名字</th>
-		</tr>
-	</thead>
-	<tbody>
-		@foreach (var book in ViewData["books"] as List<TBook>)
-  {
-			<tr>
-				<td>
-					@Html.ActionLink(book.ID.ToString(), "ToBook", new { openid = book.ID }) |
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => book.Name) |
-				</td>
-				<td>
-					<a id="lnk" onclick="return dolnk(@book.ID.ToString())">SHOW</a>
-				</td>
-			</tr>
-  }
-	</tbody>
-</table>
-<div id="divDialate">
-	<h2>BOOK</h2>
-
-	<label>ID</label>
-	<label id="lblID"></label>
-	<br />
-	<label>Name</label>
-	<label id="lblName"></label>
-	<br />
-	<label>Description</label>
-	<label id="lblDescription"></label>
+<div class="table-responsive">
+    <table class="table table-sm">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">NAME</th>
+                <th scope="col"><br /></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var book in ViewData["books"] as List<TBook>)
+            {
+                <tr>
+                    <th>
+                        @Html.ActionLink(book.ID.ToString(), "ToBook", new { openid = book.ID })
+                    </th>
+                    <td>
+                        @Html.DisplayFor(modelItem => book.Name)
+                    </td>
+                    <td>
+                        <nav class="navbar navbar-light">
+                            <button type="button" class="btn btn-outline-success my-2 my-sm-0" onclick="return dolnk(@book.ID.ToString())">SHOW</button>
+                        </nav>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>
 
-<br />
+<div id="divDialate" class="card">
+    <h4 class="card-header">
+        BOOK
+    </h4>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-sm-2"><h6 class="card-title">Name:</h6></div>
+            <div class="col-sm-10"><span id="lblName"></span></div>
+        </div>
+        <div class="row">
+            <div class="col-sm-2"><h6 class="card-title">Description:</h6></div>
+            <div class="col-sm-10"><span id="lblDescription"></span></div>
+        </div>
+    </div>
+</div>
 <p>
-	@Html.ActionLink("<<<<", "Index", "Home")
+    @Html.ActionLink("<<<<", "Index", "Home")
 </p>

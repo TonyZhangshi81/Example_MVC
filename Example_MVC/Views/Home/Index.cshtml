@@ -1,78 +1,76 @@
 ﻿@{
-	ViewBag.Title = "Index";
+    /**/
+
+    ViewBag.Title = "Index";
 }
 <script type="text/javascript">
 
     $(document).ready(function () {
-		controlEvent();
-	});
+        controlEvent();
+    });
 
-	function controlEvent() {
-		$('#btsubmit').click(function () { return submit(); });
-	}
+    function controlEvent() {
+        $('#btsubmit').click(function () { return submit(); });
+    }
 
     function submit() {
-		$.ajax({
+        $.ajax({
             url: "/Example_MVC/Home/DisplayMsg",
             dataType: "text",
-			type: "POST",
-			data: { "name": $('#txtName').val() },
-			success: function (result) {
+            type: "POST",
+            data: { "name": $('#txtName').val() },
+            success: function (result) {
                 var obj = JSON.parse(result);
-				alert(obj.Message);
+                alert(obj.Message);
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
                 alert(XMLHttpRequest.status);
                 alert(XMLHttpRequest.readyState);
                 alert(textStatus);
             }
-		});
-		return false;
-	}
+        });
+        return false;
+    }
 
 </script>
 
 @using (Html.BeginForm("Index", "Home", FormMethod.Post))
-{ 
-	<h2>@ViewBag.Message</h2>
-	<span>Input:</span>
-	@Html.TextBox("txtName")
-	<input type="button" value="submit" id="btsubmit" />
-	<br />
-	<input type="submit" value="NEXT" name="commandName" />
-	
-	<br />
-	<br />
-	<span>BOOK NAME:</span>
-	@Html.TextBox("txtBookName")
-	<input type="submit" value="SHOW" name="commandName" />
-	
-	
-	<br />
-	<br />
-	<p>
-		@Html.ActionLink("待审核", "Index", "Console") |
+{
+    <h2>@ViewBag.Message</h2>
+    <span>Input:</span>
+    @Html.TextBox("txtName")
+    <input type="button" value="submit" id="btsubmit" />
+    <br />
+    <input type="submit" value="NEXT" name="commandName" />
 
-		@Html.ActionLink("已上墙", "Index", "Accept") |
+    <br />
+    <br />
+    <span>BOOK NAME:</span>
+    @Html.TextBox("txtBookName")
+    <input type="submit" value="SHOW" name="commandName" />
 
-		@Html.ActionLink("未通过", "Index", "Refuse")
-	</p>
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	@Html.ActionLink("跳转到About页面", "About", new
-	{
-		id = 2,
-		type = "about"
-	})
 
-	
-	
+    <br />
+    <br />
+    <p>
+        @Html.ActionLink("Console", "Index", "Console") |
 
+        @Html.ActionLink("Accept", "Index", "Accept") |
+
+        @Html.ActionLink("Refuse", "Index", "Refuse")
+    </p>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    @Html.ActionLink("跳转到About页面", "About", new
+    {
+        id = 2,
+        type = "about"
+    })
 }
 
