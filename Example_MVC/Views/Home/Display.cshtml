@@ -3,6 +3,26 @@
     ViewBag.Title = "Display";
 }
 
+<style>
+    div.datagrid-mask {
+        height: auto;
+        text-align: center;
+        background: #b6ff00;
+        z-index: 1;
+        overflow: hidden;
+        position: fixed;
+        left: 0px;
+        width: 100%;
+        bottom: 0;
+        top: expression(document.documentElement.clientHeight + document.documentElement.scrollTop - this.offsetHeight);
+    }
+
+    .imgBook {
+        width: 100px;
+        height: 120px;
+    }
+</style>
+
 <script type="text/javascript">
 
     $(document).ready(function () {
@@ -17,25 +37,34 @@
         $('#divDialate').attr("style", "display:blank;");
 
         $.ajax({
-            url: "http://localhost/BookServer/BookService.svc/GetData",
+            url: "http://localhost/BookServer/BookService.svc/GetBook",
             type: "POST",
             contentType: "text/json",
             data: '{"id":' + id + '}',
             dataType: "json",
+
+            beforeSend: function () {
+                $("<div class=\"datagrid-mask\"></div>").html("Please Wait...").appendTo("body");
+            },
+
+            complete: function (data) {
+                setTimeout(function () {
+                    $('.datagrid-mask').remove();
+                }, 400);
+            },
+
             success: function (result) {
-                if (result == null) {
+                if (result == null || result.GetBookResult == null) {
                     alert('no book!');
                     return;
                 }
-                var info = result.GetDataResult;
-                $('#lblID').text(info.ID);
+                var info = result.GetBookResult;
                 $('#lblName').text(info.Name);
                 $('#lblDescription').text(info.Description);
+                $('#imgUp').attr('src', info.ImgUrl);
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
-                alert(XMLHttpRequest.status);
-                alert(XMLHttpRequest.readyState);
-                alert(textStatus);
+                alert("status:" + XMLHttpRequest.status + " readyState:" + XMLHttpRequest.readyState + " textStatus:" + textStatus);
             }
         });
 
@@ -45,35 +74,36 @@
 </script>
 
 <h2>@ViewBag.Message</h2>
-
-<div class="table-responsive">
-    <table class="table table-sm">
-        <thead>
-            <tr>
-                <th scope="col">ID</th>
-                <th scope="col">NAME</th>
-                <th scope="col"><br /></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var book in ViewData["books"] as List<TBook>)
-            {
+<div class="pre-scrollable">
+    <div class="table-responsive">
+        <table class="table table-sm">
+            <thead>
                 <tr>
-                    <th>
-                        @Html.ActionLink(book.ID.ToString(), "ToBook", new { openid = book.ID })
-                    </th>
-                    <td>
-                        @Html.DisplayFor(modelItem => book.Name)
-                    </td>
-                    <td>
-                        <nav class="navbar navbar-light">
-                            <button type="button" class="btn btn-outline-success my-2 my-sm-0" onclick="return dolnk(@book.ID.ToString())">SHOW</button>
-                        </nav>
-                    </td>
+                    <th scope="col">ID</th>
+                    <th scope="col">NAME</th>
+                    <th scope="col"><br /></th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var book in ViewData["books"] as List<TBook>)
+                {
+                    <tr>
+                        <th>
+                            @Html.ActionLink(book.ID.ToString(), "ToBook", new { openid = book.ID })
+                        </th>
+                        <td>
+                            @Html.DisplayFor(modelItem => book.Name)
+                        </td>
+                        <td>
+                            <nav class="navbar navbar-light">
+                                <button type="button" class="btn btn-outline-success my-2 my-sm-0" onclick="return dolnk('@book.ID')">SHOW</button>
+                            </nav>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </div>
 
 <div id="divDialate" class="card">
@@ -82,12 +112,17 @@
     </h4>
     <div class="card-body">
         <div class="row">
-            <div class="col-sm-2"><h6 class="card-title">Name:</h6></div>
-            <div class="col-sm-10"><span id="lblName"></span></div>
-        </div>
-        <div class="row">
-            <div class="col-sm-2"><h6 class="card-title">Description:</h6></div>
-            <div class="col-sm-10"><span id="lblDescription"></span></div>
+            <div class="col-sm-2"><img id="imgUp" src="###" class="imgBook" /></div>
+            <div class="col-sm-10">
+                <div class="row">
+                    <div class="col-sm-2"><h6 class="card-title">Name:</h6></div>
+                    <div class="col-sm-10"><span id="lblName"></span></div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-2"><h6 class="card-title">Description:</h6></div>
+                    <div class="col-sm-10"><span id="lblDescription"></span></div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

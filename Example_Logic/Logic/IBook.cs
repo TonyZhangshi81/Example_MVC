@@ -30,6 +30,6 @@ namespace Example_Logic.Logic
 		/// </summary>
 		/// <param name="id"></param>
 		/// <returns></returns>
-		TBook GetBook(int id);
+		TBook GetBook(string id);
 	}
 }

@@ -20,11 +20,11 @@ namespace Example_MVC.Controllers
 		{
 			switch (commandName)
 			{
-				case "NEXT":
+				case "Go":
 					//return RedirectToAction("Show", new RouteValueDictionary(new { controller = "Play", action = "Show" }));
 					var paramater = this.Request.Form["txtName"].ToString();
 					return RedirectToAction("Show", "Play", new { id = 1, type = paramater });
-				case "SHOW":
+				case "All":
 					ViewBag.Message = DateTime.Now.ToString();
 
 					var name = this.Request.Form["txtBookName"].ToString();

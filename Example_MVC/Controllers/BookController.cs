@@ -16,9 +16,9 @@ namespace Example_MVC.Controllers
 		/// </summary>
 		/// <param name="id"></param>
 		/// <returns></returns>
-		public ActionResult Show(int id)
+		public ActionResult Show(string id)
 		{
-			var book = this.GetBookInfo(id);
+			var book = this.GetBookInfo(id.PadLeft(3, '0'));
 			return View("Show", book);
 		}
 
@@ -37,7 +37,7 @@ namespace Example_MVC.Controllers
 		/// </summary>
 		/// <param name="id"></param>
 		/// <returns></returns>
-		private TBook GetBookInfo(int id)
+		private TBook GetBookInfo(string id)
 		{
 			var logic = new Book();
 			return logic.GetBook(id);

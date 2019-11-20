@@ -19,7 +19,7 @@ namespace Example_MVC
 		/// <returns></returns>
 		[OperationContract]
 		[WebInvoke(UriTemplate = "/GetCount", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
-		int GetCount(int id);
+		int GetCount(string id);
 
 		/// <summary>
 		/// 
@@ -27,17 +27,18 @@ namespace Example_MVC
 		/// <param name="id"></param>
 		/// <returns></returns>
 		[OperationContract]
-		[WebInvoke(UriTemplate = "/GetData", Method = "POST", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Json)]
-		BookInfo GetData(int id);
+		[WebInvoke(UriTemplate = "/GetBook", Method = "POST", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Json)]
+		BookInfo GetBook(string id);
 
 		/// <summary>
 		/// 
 		/// </summary>
+        /// <param name="id"></param>
 		/// <param name="composite"></param>
 		/// <returns></returns>
 		[OperationContract]
-		[WebInvoke(UriTemplate = "/Update", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json)]
-		int UpdateMoshikomiInfo(BookInfo info);
+		[WebInvoke(UriTemplate = "/Update", Method = "PUT", BodyStyle = WebMessageBodyStyle.WrappedRequest, RequestFormat = WebMessageFormat.Json)]
+		bool Update(string id, BookInfo info);
 	}
 
 	// サービス操作に複合型を追加するには、以下のサンプルに示すようにデータ コントラクトを使用します。
@@ -51,7 +52,7 @@ namespace Example_MVC
 		/// 
 		/// </summary>
 		[DataMember]
-		public int ID { get; set; }
+		public string ID { get; set; }
 
 		/// <summary>
 		/// 
@@ -64,5 +65,11 @@ namespace Example_MVC
 		/// </summary>
 		[DataMember]
 		public string Description { get; set; }
-	}
+
+        /// <summary>
+		/// 
+		/// </summary>
+		[DataMember]
+        public string ImgUrl { get; set; }
+    }
 }

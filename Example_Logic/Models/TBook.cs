@@ -1,15 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Example_Logic.Models
+﻿namespace Example_Logic.Models
 {
-	public class TBook
-	{
-		public int ID { get; set; }
-		public string Name { get; set; }
-		public string Description { get; set; }
-	}
+    /// <summary>
+    /// 
+    /// </summary>
+    public class TBook
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        public string ID { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string Name { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string Description { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string ImgUrl { get; set; }
+    }
 }
