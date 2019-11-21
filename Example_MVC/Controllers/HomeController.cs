@@ -29,9 +29,9 @@ namespace Example_MVC.Controllers
 
 					var name = this.Request.Form["txtBookName"].ToString();
 					var books = this.GetBooks(name);
-					this.ViewData.Add("books", books);
+					//this.ViewData.Add("books", books);
 
-					return View("Display");
+					return View("Display", books);
 			}
 
 			ViewBag.Message = "ASP.NET MVC4示例 " + DateTime.Now.ToString();
@@ -48,9 +48,9 @@ namespace Example_MVC.Controllers
 			ViewBag.Message = DateTime.Now.ToString();
 
 			var books = this.GetBooks(name);
-			this.ViewData.Add("books", books);
+			//this.ViewData.Add("books", books);
 
-			return View("Display");
+			return View("Display", books);
 		}
 
 		/// <summary>
@@ -72,12 +72,24 @@ namespace Example_MVC.Controllers
 			}
 		}
 
-		/// <summary>
+        /// <summary>
 		/// 
 		/// </summary>
-		/// <param name="type"></param>
+		/// <param name="id"></param>
 		/// <returns></returns>
-		public ActionResult About(int id, string type)
+		private TBook GetBook(string id)
+        {
+            var logic = new Book();
+
+            return logic.GetBook(id);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public ActionResult About(int id, string type)
 		{
 			return RedirectToAction("Index", "About", new { id = id, type = type });
 		}
@@ -87,10 +99,11 @@ namespace Example_MVC.Controllers
 		/// </summary>
 		/// <param name="openid"></param>
 		/// <returns></returns>
-		public ActionResult ToBook(int openid)
+		public ActionResult ToBook(string openid)
 		{
-			return RedirectToAction("Show", "Book", new { id = openid });
-		}
+            TempData["book"] = this.GetBook(openid);
+            return RedirectToAction("Show", "Book");
+        }
 
 		/// <summary>
 		/// 

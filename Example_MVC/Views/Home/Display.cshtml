@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "Display";
 }
+@model List<TBook>
 
 <style>
     div.datagrid-mask {
@@ -85,11 +86,12 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var book in ViewData["books"] as List<TBook>)
+                @*foreach (var book in ViewData["books"] as List<TBook>)*@
+                @foreach (var book in Model) 
                 {
                     <tr>
                         <th>
-                            @Html.ActionLink(book.ID.ToString(), "ToBook", new { openid = book.ID })
+                            @Html.ActionLink(book.ID.ToString(), "ToBook", new { openid = book.ID }, new { onclick = "return confirm('go to next now ?');" })
                         </th>
                         <td>
                             @Html.DisplayFor(modelItem => book.Name)
