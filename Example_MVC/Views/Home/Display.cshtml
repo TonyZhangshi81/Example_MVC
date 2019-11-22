@@ -62,7 +62,7 @@
                 var info = result.GetBookResult;
                 $('#lblName').text(info.Name);
                 $('#lblDescription').text(info.Description);
-                $('#imgUp').attr('src', info.ImgUrl);
+                $('#imgBook').attr('src', info.ImgUrl);
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
                 alert("status:" + XMLHttpRequest.status + " readyState:" + XMLHttpRequest.readyState + " textStatus:" + textStatus);
@@ -86,20 +86,18 @@
                 </tr>
             </thead>
             <tbody>
-                @*foreach (var book in ViewData["books"] as List<TBook>)*@
                 @foreach (var book in Model) 
                 {
                     <tr>
                         <th>
-                            @Html.ActionLink(book.ID.ToString(), "ToBook", new { openid = book.ID }, new { onclick = "return confirm('go to next now ?');" })
+                            @Html.ActionLink(book.ID.ToString(), "ToBook", new { id = book.ID }, new { onclick = "return confirm('go to next now ?');" })
                         </th>
-                        <td>
+                        <td onclick="return dolnk('@book.ID')">
                             @Html.DisplayFor(modelItem => book.Name)
                         </td>
                         <td>
-                            <nav class="navbar navbar-light">
-                                <button type="button" class="btn btn-outline-success my-2 my-sm-0" onclick="return dolnk('@book.ID')">SHOW</button>
-                            </nav>
+                            @Html.ActionLink("Edit", "Edit", new { id = book.ID }, new { @class = "badge badge-primary" }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = book.ID }, new { @class = "badge badge-secondary" })
                         </td>
                     </tr>
                 }
@@ -114,7 +112,7 @@
     </h4>
     <div class="card-body">
         <div class="row">
-            <div class="col-sm-2"><img id="imgUp" src="###" class="imgBook" /></div>
+            <div class="col-sm-2"><img id="imgBook" src="###" class="imgBook" /></div>
             <div class="col-sm-10">
                 <div class="row">
                     <div class="col-sm-2"><h6 class="card-title">Name:</h6></div>

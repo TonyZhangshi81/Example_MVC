@@ -1,4 +1,6 @@
-﻿namespace Example_Logic.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Example_Logic.Models
 {
     /// <summary>
     /// 
@@ -16,6 +18,9 @@
         /// <summary>
         /// 
         /// </summary>
+        [Required(ErrorMessage = "Description is required")]
+        [MinLength(10)]
+        [MaxLength(100)]
         public string Description { get; set; }
         /// <summary>
         /// 

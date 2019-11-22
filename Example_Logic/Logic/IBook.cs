@@ -31,5 +31,19 @@ namespace Example_Logic.Logic
 		/// <param name="id"></param>
 		/// <returns></returns>
 		TBook GetBook(string id);
-	}
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="book"></param>
+        /// <returns></returns>
+        bool Update(TBook book);
+
+        /// <summary>
+		/// 
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns></returns>
+		bool Delete(string id);
+    }
 }

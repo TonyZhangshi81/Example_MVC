@@ -6,9 +6,29 @@
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
     <link href="@Url.Content("~/Content/bootstrap.min.css")" rel="stylesheet" type="text/css" />
-    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery-3.0.0.min.js")"></script>
+    <link href="@Url.Content("~/Content/toastr.min.css")" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery-3.4.1.min.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/toastr.min.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Scripts/json2.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
+
+    <style>
+        .toast-center-top {
+            top: 2%;
+            left: 50%;
+            margin-top: -25px;
+            margin-left: -150px;
+        }
+    </style>
+
+    <script type="text/javascript">
+        toastr.options.positionClass = 'toast-center-top';
+        toastr.options.timeOut = 1000;
+    </script>
+
 </head>
 
 <body>

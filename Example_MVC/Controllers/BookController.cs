@@ -9,23 +9,104 @@ namespace Example_MVC.Controllers
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="book"></param>
         /// <returns></returns>
         public ActionResult Show()
         {
-            var book = (TBook)TempData["book"];
-
-            return View("Show", book);
+            return this.Display("Show");
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="bookName"></param>
+        /// <param name="book"></param>
         /// <returns></returns>
-        public ActionResult HomeDisplay(string bookName)
+        public ActionResult Edit()
         {
-            return RedirectToAction("Display", "Home", new { name = bookName });
+            return this.Display("Edit");
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="book"></param>
+        /// <returns></returns>
+        public ActionResult Delete()
+        {
+            return this.Display("Delete");
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="viewName"></param>
+        /// <returns></returns>
+        private ActionResult Display(string viewName)
+        {
+            TBook book = (TBook)TempData["book"];
+            return View(viewName, book);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="book"></param>
+        /// <param name="commandName"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult Edit(TBook book, string commandName)
+        {
+            if ("close".Equals(commandName))
+            {
+                return this.Close();
+            }
+
+            if (ModelState.IsValid)
+            {
+                var id = Request.Form["ID"];
+                var description = Request.Form["Description"];
+
+                ViewBag.Result = "0";
+                var isSuccess = this.Update(id, description);
+                if (!isSuccess)
+                {
+                    ViewBag.Result = "1";
+                }
+            }
+
+            return View(book);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="book"></param>
+        /// <param name="commandName"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult Delete(TBook book, string commandName)
+        {
+            if ("close".Equals(commandName))
+            {
+                return this.Close();
+            }
+
+            ViewBag.Result = "0";
+            var isSuccess = this.Delete(book.ID);
+            if (!isSuccess)
+            {
+                ViewBag.Result = "1";
+                return View("Delete", book);
+            }
+            return this.Close();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        private ActionResult Close()
+        {
+            return RedirectToAction("DisplayAll", "Home");
         }
 
         /// <summary>
@@ -37,6 +118,29 @@ namespace Example_MVC.Controllers
         {
             var logic = new Book();
             return logic.GetBook(id);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="description"></param>
+        /// <returns></returns>
+        private bool Update(string id, string description)
+        {
+            var logic = new Book();
+            return logic.Update(new TBook { ID = id, Description = description });
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        private bool Delete(string id)
+        {
+            var logic = new Book();
+            return logic.Delete(id);
         }
     }
 }

@@ -34,16 +34,31 @@ namespace Example_MVC.Controllers
 					return View("Display", books);
 			}
 
-			ViewBag.Message = "ASP.NET MVC4示例 " + DateTime.Now.ToString();
+			ViewBag.Message = "ASP.NET MVC5示例 " + DateTime.Now.ToString();
 			return View();
 		}
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="name"></param>
-		/// <returns></returns>
-		public ActionResult Display(string name)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        [ActionName("DisplayAll")]
+        public ActionResult Display()
+        {
+            ViewBag.Message = DateTime.Now.ToString();
+
+            var books = this.GetBooks();
+
+            return View("Display", books);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public ActionResult Display(string name)
 		{
 			ViewBag.Message = DateTime.Now.ToString();
 
@@ -53,12 +68,21 @@ namespace Example_MVC.Controllers
 			return View("Display", books);
 		}
 
-		/// <summary>
+        /// <summary>
 		/// 
 		/// </summary>
-		/// <param name="name"></param>
 		/// <returns></returns>
-		private List<TBook> GetBooks(string name)
+		private List<TBook> GetBooks()
+        {
+            return this.GetBooks(string.Empty);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        private List<TBook> GetBooks(string name)
 		{
 			var logic = new Book();
 
@@ -97,20 +121,42 @@ namespace Example_MVC.Controllers
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="openid"></param>
+		/// <param name="id"></param>
 		/// <returns></returns>
-		public ActionResult ToBook(string openid)
+		public ActionResult ToBook(string id)
 		{
-            TempData["book"] = this.GetBook(openid);
+            TempData["book"] = this.GetBook(id);
             return RedirectToAction("Show", "Book");
         }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="name"></param>
-		/// <returns></returns>
-		[HttpPost]
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult Edit(string id)
+        {
+            TempData["book"] = this.GetBook(id);
+            return RedirectToAction("Edit", "Book");
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult Delete(string id)
+        {
+            TempData["book"] = this.GetBook(id);
+            return RedirectToAction("Delete", "Book");
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        [HttpPost]
 		public JsonResult DisplayMsg(string name)
 		{
 			string result = name + " <- " + System.DateTime.Now.ToString();

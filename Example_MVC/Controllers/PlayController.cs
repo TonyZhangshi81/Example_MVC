@@ -19,7 +19,7 @@ namespace Example_MVC.Controllers
         {
 			var paramters = new StringBuilder();
 			paramters.AppendFormat("id: {0} type: '{1}'", id, type);
-			ViewBag.Message = "MVC4示例 param:" + paramters.ToString() + "  " + DateTime.Now.ToString();
+			ViewBag.Message = "MVC5示例 param:" + paramters.ToString() + "  " + DateTime.Now.ToString();
             return View();
         }
     }

@@ -59,5 +59,41 @@ namespace Example_Logic.Logic
         {
             return bookList.Where(d => d.ID == id).First();
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="book"></param>
+        /// <returns></returns>
+        public bool Update(TBook book)
+        {
+            var item = this.GetBook(book.ID);
+            if (item == null)
+            {
+                return false;
+            }
+
+            item.Description = book.Description;
+
+            return true;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public bool Delete(string id)
+        {
+            var item = this.GetBook(id);
+            if (item == null)
+            {
+                return false;
+            }
+
+            bookList.Remove(item);
+
+            return true;
+        }
     }
 }

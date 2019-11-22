@@ -15,7 +15,7 @@ namespace Example_MVC.Controllers
 		/// <returns></returns>
 		public ActionResult Index()
         {
-			ViewBag.Message = "MVC4示例 Accept  " + DateTime.Now.ToString();
+			ViewBag.Message = "MVC5示例 Accept  " + DateTime.Now.ToString();
             return View();
         }
     }

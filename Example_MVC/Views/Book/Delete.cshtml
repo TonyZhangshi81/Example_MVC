@@ -1,0 +1,68 @@
+﻿@model Example_Logic.Models.TBook
+@{
+    ViewBag.Title = "Book";
+}
+
+<style>
+    .lblBookDescription {
+        width: 550px;
+        height: 100px;
+    }
+
+    .imgBook {
+        width: 100px;
+        height: 120px;
+    }
+</style>
+
+<script type="text/javascript">
+
+        $(document).ready(function () {
+            init();
+        });
+
+        init = function () {
+            if ("@ViewBag.Result" == "1") {
+                toastr.error('delete error!');
+            }
+        }
+
+</script>
+
+
+@using (Html.BeginForm("Delete", "Book", FormMethod.Post))
+{
+    @Html.HiddenFor(m => m.ID)
+    <div id="divDialate" class="card">
+        <h4 class="card-header">
+            BOOK
+        </h4>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-2"><img id="imgBook" src="@Model.ImgUrl" class="imgBook" /></div>
+                <div class="col-sm-10">
+                    <div class="row">
+                        <div class="col-sm-2"><h6 class="card-title">@Html.LabelFor(m => m.ID):</h6></div>
+                        <div class="col-sm-10">@Html.DisplayFor(m => m.ID)</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2"><h6 class="card-title">@Html.LabelFor(m => m.Name):</h6></div>
+                        <div class="col-sm-10">@Html.DisplayFor(m => m.Name)</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2"><h6 class="card-title">@Html.LabelFor(m => m.Description):</h6></div>
+                        <div class="col-sm-10">@Html.Label("Description", Model.Description, new { @class = "lblBookDescription" })</div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-8">
+                    <input type="submit" class="btn btn-primary" value="delete" name="commandName" onclick="return confirm('are you sure?');" />
+                    <input type="submit" class="btn btn-secondary" value="close" name="commandName" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <br />
+}
