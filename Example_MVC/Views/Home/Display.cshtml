@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "Display";
 }
-@model List<TBook>
+@model List<BookInfo>
 
 <style>
     div.datagrid-mask {
@@ -93,7 +93,7 @@
                             @Html.ActionLink(book.ID.ToString(), "ToBook", new { id = book.ID }, new { onclick = "return confirm('go to next now ?');" })
                         </th>
                         <td onclick="return dolnk('@book.ID')">
-                            @Html.DisplayFor(modelItem => book.Name)
+                            @Html.DisplayFor(m => book.Name)
                         </td>
                         <td>
                             @Html.ActionLink("Edit", "Edit", new { id = book.ID }, new { @class = "badge badge-primary" }) |

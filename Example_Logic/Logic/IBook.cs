@@ -16,28 +16,28 @@ namespace Example_Logic.Logic
 		/// 
 		/// </summary>
 		/// <returns></returns>
-		List<TBook> GetBooks();
+		List<BookInfo> GetBooks();
 
 		/// <summary>
 		/// 
 		/// </summary>
 		/// <param name="name"></param>
 		/// <returns></returns>
-		List<TBook> GetBooks(string name);
+		List<BookInfo> GetBooksWithName(string name);
 
 		/// <summary>
 		/// 
 		/// </summary>
 		/// <param name="id"></param>
 		/// <returns></returns>
-		TBook GetBook(string id);
+		BookInfo GetBook(string id);
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="book"></param>
         /// <returns></returns>
-        bool Update(TBook book);
+        bool Update(BookInfo book);
 
         /// <summary>
 		/// 

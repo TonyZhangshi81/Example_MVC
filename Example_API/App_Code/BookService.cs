@@ -29,6 +29,22 @@ namespace Example_MVC
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
+        public bool Delete(string id)
+        {
+            
+            if (!bookList.Any(d => d.ID == id))
+            {
+                return false;
+            }
+            bookList.Remove(bookList.Where(d => d.ID == id).First());
+            return true;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public BookInfo GetBook(string id)
         {
             List<BookInfo> result = bookList.Where(d => d.ID == id).ToList();
@@ -38,6 +54,15 @@ namespace Example_MVC
             }
 
             return result[0];
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public List<BookInfo> GetBooks()
+        {
+            return bookList;
         }
 
         /// <summary>

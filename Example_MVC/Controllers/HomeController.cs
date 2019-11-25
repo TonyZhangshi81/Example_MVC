@@ -72,7 +72,7 @@ namespace Example_MVC.Controllers
 		/// 
 		/// </summary>
 		/// <returns></returns>
-		private List<TBook> GetBooks()
+		private List<BookInfo> GetBooks()
         {
             return this.GetBooks(string.Empty);
         }
@@ -82,7 +82,7 @@ namespace Example_MVC.Controllers
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        private List<TBook> GetBooks(string name)
+        private List<BookInfo> GetBooks(string name)
 		{
 			var logic = new Book();
 
@@ -92,7 +92,7 @@ namespace Example_MVC.Controllers
 			}
 			else
 			{
-				return logic.GetBooks(name);
+				return logic.GetBooksWithName(name);
 			}
 		}
 
@@ -101,7 +101,7 @@ namespace Example_MVC.Controllers
 		/// </summary>
 		/// <param name="id"></param>
 		/// <returns></returns>
-		private TBook GetBook(string id)
+		private BookInfo GetBook(string id)
         {
             var logic = new Book();
 

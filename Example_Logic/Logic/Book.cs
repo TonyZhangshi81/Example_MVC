@@ -9,20 +9,6 @@ namespace Example_Logic.Logic
     /// </summary>
     public class Book : IBook
     {
-        public static List<TBook> bookList = new List<TBook>()
-        {
-                new TBook(){ ID = "001", Name = "Pilgrimage to the West; Journey to the West", Description = "将世界观层面的恐怖推向极致的作品。", ImgUrl = "/Example_MVC/Content/image/books/001.jpg" },
-                new TBook(){ ID = "002", Name = "The Romance of the Three Kingdoms", Description = "这不是一部励志成功学，作者最不想展露的一面恰恰是成功。", ImgUrl = "/Example_MVC/Content/image/books/002.jpg" },
-                new TBook(){ ID = "003", Name = "A Dream in Red Mansions (The Story of the Stone)", Description = "他将乌克兰政局的荒谬，社会的破败包裹在一个悬疑色彩的黑色喜剧之下。", ImgUrl = "/Example_MVC/Content/image/books/003.jpg" },
-                new TBook(){ ID = "004", Name = "Heroes of the Marshes; Water Margins", Description = "从烂熟的颓废中生出的一无牵挂的恬淡和潇洒。", ImgUrl = "/Example_MVC/Content/image/books/004.jpg" },
-                new TBook(){ ID = "005", Name = "Compendium of Materia Medica", Description = "三十年前的宅男畅想。", ImgUrl = "/Example_MVC/Content/image/books/005.jpg" },
-                new TBook(){ ID = "006", Name = "Strange Tales of a Lonely Studio", Description = "戴上VR看历史。", ImgUrl = "/Example_MVC/Content/image/books/006.jpg" },
-                new TBook(){ ID = "007", Name = "Analects of Confucius", Description = "什么样的书会让译者生不如死？", ImgUrl = "/Example_MVC/Content/image/books/007.jpg" },
-                new TBook(){ ID = "008", Name = "the Classic of Mountains and Rivers", Description = "这“最后的仪式”正是死亡和告别这一反应行为的终极延长。", ImgUrl = "/Example_MVC/Content/image/books/008.jpg" },
-                new TBook(){ ID = "009", Name = "A Surrounded City", Description = "人和人之间接近于神的救赎。", ImgUrl = "/Example_MVC/Content/image/books/009.jpg" },
-                new TBook(){ ID = "010", Name = "The Romance of West Chamber", Description = "人们不停地在伦敦追逐，却又被伦敦放逐。", ImgUrl = "/Example_MVC/Content/image/books/010.jpg" }
-        };
-
         public Book()
         {
         }
@@ -31,9 +17,15 @@ namespace Example_Logic.Logic
         /// 
         /// </summary>
         /// <returns></returns>
-        public List<TBook> GetBooks()
+        public List<BookInfo> GetBooks()
         {
-            return this.GetBooks(string.Empty);
+            var apiRequestHttp = new ApiRequestHttp();
+            apiRequestHttp.HttpPostSync(@"http://localhost/BookServer/BookService.svc/GetBooks", string.Empty);
+
+            var json = apiRequestHttp.OutputJson;
+            var books = ApiRequestHttp.Deserialize<ApiGetBooksType>(json);
+
+            return books.GetBooksResult;
         }
 
         /// <summary>
@@ -41,8 +33,9 @@ namespace Example_Logic.Logic
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        public List<TBook> GetBooks(string name)
+        public List<BookInfo> GetBooksWithName(string name)
         {
+            var bookList = this.GetBooks();
             if (string.IsNullOrEmpty(name))
             {
                 return bookList;
@@ -55,9 +48,20 @@ namespace Example_Logic.Logic
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public TBook GetBook(string id)
+        public BookInfo GetBook(string id)
         {
-            return bookList.Where(d => d.ID == id).First();
+            var apiRequestHttp = new ApiRequestHttp();
+
+            var data = new {
+                id = id
+            };
+
+            apiRequestHttp.HttpPostSync(@"http://localhost/BookServer/BookService.svc/GetBook", data);
+
+            var json = apiRequestHttp.OutputJson;
+            var book = ApiRequestHttp.Deserialize<ApiGetBookWithIdType>(json);
+
+            return book.GetBookResult;
         }
 
         /// <summary>
@@ -65,7 +69,7 @@ namespace Example_Logic.Logic
         /// </summary>
         /// <param name="book"></param>
         /// <returns></returns>
-        public bool Update(TBook book)
+        public bool Update(BookInfo book)
         {
             var item = this.GetBook(book.ID);
             if (item == null)
@@ -85,13 +89,17 @@ namespace Example_Logic.Logic
         /// <returns></returns>
         public bool Delete(string id)
         {
-            var item = this.GetBook(id);
-            if (item == null)
-            {
-                return false;
-            }
+            var apiRequestHttp = new ApiRequestHttp();
 
-            bookList.Remove(item);
+            var data = new
+            {
+                id = id
+            };
+
+            apiRequestHttp.HttpPostSync(@"http://localhost/BookServer/BookService.svc/Delete", data);
+
+            var json = apiRequestHttp.OutputJson;
+            var result = ApiRequestHttp.Deserialize<bool>(json);
 
             return true;
         }
