@@ -1,4 +1,5 @@
-﻿using Example_Logic.Models;
+﻿using Example.Common;
+using Example_Logic.Models;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -52,7 +53,8 @@ namespace Example_Logic.Logic
         {
             var apiRequestHttp = new ApiRequestHttp();
 
-            var data = new {
+            var data = new
+            {
                 id = id
             };
 
@@ -91,17 +93,19 @@ namespace Example_Logic.Logic
         {
             var apiRequestHttp = new ApiRequestHttp();
 
-            var data = new
+            var requestAll = new
             {
-                id = id
+                metadata = new { requestId = "" },
+                request = new { id = id }
             };
 
-            apiRequestHttp.HttpPostSync(@"http://localhost/BookServer/BookService.svc/Delete", data);
+            apiRequestHttp.HttpPostSync(@"http://localhost/BookServer/BookService.svc/Delete", requestAll);
 
             var json = apiRequestHttp.OutputJson;
-            var result = ApiRequestHttp.Deserialize<bool>(json);
+            var result = ApiRequestHttp.Deserialize<ResponseObject<ResponseMetadata, ApiDeleteBookWithIdResponse>>(json);
 
-            return true;
+            ExtBooleanConverter booleanConverter = new ExtBooleanConverter();
+            return (bool)booleanConverter.ConvertFrom(result.Response.Result);
         }
     }
 }
