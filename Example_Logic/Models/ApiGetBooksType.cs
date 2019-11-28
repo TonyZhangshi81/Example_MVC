@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Example_Logic.Models
 {
@@ -17,6 +13,6 @@ namespace Example_Logic.Models
         /// 
         /// </summary>
         [DataMember]
-        public List<BookInfo> GetBooksResult { get; set; }
+        public List<Example_Models.Entities.Book> GetBooksResult { get; set; }
     }
 }

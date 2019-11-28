@@ -72,7 +72,7 @@ namespace Example_MVC.Controllers
 		/// 
 		/// </summary>
 		/// <returns></returns>
-		private List<BookInfo> GetBooks()
+		private List<Example_Models.Entities.Book> GetBooks()
         {
             return this.GetBooks(string.Empty);
         }
@@ -82,7 +82,7 @@ namespace Example_MVC.Controllers
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        private List<BookInfo> GetBooks(string name)
+        private List<Example_Models.Entities.Book> GetBooks(string name)
 		{
 			var logic = new Book();
 
@@ -101,7 +101,7 @@ namespace Example_MVC.Controllers
 		/// </summary>
 		/// <param name="id"></param>
 		/// <returns></returns>
-		private BookInfo GetBook(string id)
+		private Example_Models.Entities.Book GetBook(string id)
         {
             var logic = new Book();
 

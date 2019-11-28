@@ -1,12 +1,13 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Text.RegularExpressions;
 
 namespace Api.ServiceModel.DataAnnotations
 {
     /// <summary>
     /// 
     /// </summary>
-    public class RequiredItemAttribute : RequiredAttribute
+    public class GuidTypeAttribute : ValidationAttribute
     {
         /// <summary>
         /// 
@@ -19,7 +20,7 @@ namespace Api.ServiceModel.DataAnnotations
             {
                 return base.FormatErrorMessage(name);
             }
-            return string.Format("error002 : parmater[{0}] is fault.", name);
+            return string.Format("error001 : parmater[{0}] is fault.", name);
         }
 
         /// <summary>
@@ -31,10 +32,10 @@ namespace Api.ServiceModel.DataAnnotations
         {
             if (value == null)
             {
-                return false;
+                return true;
             }
             string text = value.ToString();
-            bool flag = !string.IsNullOrEmpty(text);
+            bool flag = Regex.IsMatch(text, @"^[a-zA-Z]\w{2,5}$");
             return flag;
         }
     }

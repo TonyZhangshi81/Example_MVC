@@ -1,11 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 
-namespace API_Logic.Entities
+namespace Example_Models.Entities
 {
     /// <summary>
     /// 
     /// </summary>
+    [DataContract]
     public class Book
     {
         /// <summary>
@@ -22,7 +23,6 @@ namespace API_Logic.Entities
         /// 
         /// </summary>
         [Required(ErrorMessage = "Description is required")]
-        [MinLength(10)]
         [MaxLength(100)]
         [DataMember(Name = "Description")]
         public string Description { get; set; }

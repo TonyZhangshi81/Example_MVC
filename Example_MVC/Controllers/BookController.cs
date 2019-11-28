@@ -42,7 +42,7 @@ namespace Example_MVC.Controllers
         /// <returns></returns>
         private ActionResult Display(string viewName)
         {
-            BookInfo book = (BookInfo)TempData["book"];
+            var book = (Example_Models.Entities.Book)TempData["book"];
             return View(viewName, book);
         }
 
@@ -53,7 +53,7 @@ namespace Example_MVC.Controllers
         /// <param name="commandName"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult Edit(BookInfo book, string commandName)
+        public ActionResult Edit(Example_Models.Entities.Book book, string commandName)
         {
             if ("close".Equals(commandName))
             {
@@ -83,7 +83,7 @@ namespace Example_MVC.Controllers
         /// <param name="commandName"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult Delete(BookInfo book, string commandName)
+        public ActionResult Delete(Example_Models.Entities.Book book, string commandName)
         {
             if ("close".Equals(commandName))
             {
@@ -114,7 +114,7 @@ namespace Example_MVC.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        private BookInfo GetBookInfo(string id)
+        private Example_Models.Entities.Book GetBookInfo(string id)
         {
             var logic = new Book();
             return logic.GetBook(id);
@@ -129,7 +129,7 @@ namespace Example_MVC.Controllers
         private bool Update(string id, string description)
         {
             var logic = new Book();
-            return logic.Update(new BookInfo { ID = id, Description = description });
+            return logic.Update(new Example_Models.Entities.Book { ID = id, Description = description });
         }
 
         /// <summary>

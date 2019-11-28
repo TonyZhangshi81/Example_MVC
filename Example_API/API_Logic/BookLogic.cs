@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Example_Models.Entities;
+using System.Collections.Generic;
 using System.Linq;
-using API_Logic.Entities;
 
 namespace API_Logic
 {
@@ -43,7 +43,7 @@ namespace API_Logic
         /// <returns></returns>
         public List<Book> Search(IDictionary<string, string> conditions = null)
         {
-            if(conditions == null)
+            if (conditions == null)
             {
                 return bookList;
             }

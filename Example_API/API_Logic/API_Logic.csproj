@@ -45,10 +45,19 @@
   <ItemGroup>
     <Compile Include="BookBase.cs" />
     <Compile Include="BookLogic.cs" />
-    <Compile Include="Entities\Book.cs" />
     <Compile Include="IBookLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResultType.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\Example.Common.csproj">
+      <Project>{06edda26-c145-4c05-997f-e70e23de26b8}</Project>
+      <Name>Example.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Example_Models\Example_Models.csproj">
+      <Project>{669409bc-7180-48f6-a851-1eec4849022b}</Project>
+      <Name>Example_Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

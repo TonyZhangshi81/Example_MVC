@@ -1,4 +1,4 @@
-﻿using API_Logic.Entities;
+﻿using Example_Models.Entities;
 using System.Collections.Generic;
 
 namespace API_Logic

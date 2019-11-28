@@ -12,6 +12,6 @@ namespace Example_Logic.Models
         /// 
         /// </summary>
         [DataMember]
-        public BookInfo GetBookResult { get; set; }
+        public Example_Models.Entities.Book GetBookResult { get; set; }
     }
 }

@@ -205,13 +205,19 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
-  <ItemGroup>
+    <ProjectReference Include="..\Common\Example.Common.csproj">
+      <Project>{06edda26-c145-4c05-997f-e70e23de26b8}</Project>
+      <Name>Example.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Example_Logic\Example_Logic.csproj">
       <Project>{7a766bd9-c43d-4377-b5f2-18523ece5118}</Project>
       <Name>Example_Logic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Example_Models\Example_Models.csproj">
+      <Project>{669409bc-7180-48f6-a851-1eec4849022b}</Project>
+      <Name>Example_Models</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

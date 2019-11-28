@@ -1,10 +1,8 @@
 ﻿using Api.ServiceModel;
 using Api.ServiceModel.Models;
 using API_Logic;
-using API_Logic.Entities;
+using Example_Models.Entities;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using System.Net;
 using System.ServiceModel;
 using System.ServiceModel.Activation;

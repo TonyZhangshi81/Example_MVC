@@ -18,7 +18,7 @@ namespace Example_Logic.Logic
         /// 
         /// </summary>
         /// <returns></returns>
-        public List<BookInfo> GetBooks()
+        public List<Example_Models.Entities.Book> GetBooks()
         {
             var apiRequestHttp = new ApiRequestHttp();
             apiRequestHttp.HttpPostSync(@"http://localhost/BookServer/BookService.svc/GetBooks", string.Empty);
@@ -34,7 +34,7 @@ namespace Example_Logic.Logic
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        public List<BookInfo> GetBooksWithName(string name)
+        public List<Example_Models.Entities.Book> GetBooksWithName(string name)
         {
             var bookList = this.GetBooks();
             if (string.IsNullOrEmpty(name))
@@ -49,7 +49,7 @@ namespace Example_Logic.Logic
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public BookInfo GetBook(string id)
+        public Example_Models.Entities.Book GetBook(string id)
         {
             var apiRequestHttp = new ApiRequestHttp();
 
@@ -71,7 +71,7 @@ namespace Example_Logic.Logic
         /// </summary>
         /// <param name="book"></param>
         /// <returns></returns>
-        public bool Update(BookInfo book)
+        public bool Update(Example_Models.Entities.Book book)
         {
             var item = this.GetBook(book.ID);
             if (item == null)
@@ -95,7 +95,7 @@ namespace Example_Logic.Logic
 
             var requestAll = new
             {
-                metadata = new { requestId = "" },
+                metadata = new { requestid = "DEL01" },
                 request = new { id = id }
             };
 

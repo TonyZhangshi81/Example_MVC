@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace Example_Logic.Models
 {
@@ -43,8 +44,8 @@ namespace Example_Logic.Models
         /// <summary>
         /// 
         /// </summary>
-        [DataMember(Name = "error", Order = 4)]
-        public string Error
+        [DataMember(Name = "messages", Order = 4)]
+        public List<string> Messages
         {
             get; set;
         }

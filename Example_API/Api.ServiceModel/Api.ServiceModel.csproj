@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataAnnotations\DataAnnotationsValidator.cs" />
+    <Compile Include="DataAnnotations\GuidTypeAttribute.cs" />
     <Compile Include="DataAnnotations\RequiredItemAttribute.cs" />
     <Compile Include="Models\ApiDeleteBookWithIdResponse.cs" />
     <Compile Include="Models\ApiBookWithIdRequest.cs" />

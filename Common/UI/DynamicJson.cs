@@ -1,4 +1,3 @@
-// Isid.BankR.Core.Web.UI.DynamicJson
 #define DEBUG
 using System;
 using System.Collections;

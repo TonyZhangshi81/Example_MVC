@@ -6,7 +6,7 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Example_API", "Example_API\", "{56F6E166-0372-48D2-B538-B11A9ED24965}"
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.7"
-		ProjectReferences = "{8e04b332-18d5-4775-99f8-564af992d901}|Api.ServiceModel.dll;{06EDDA26-C145-4C05-997F-E70E23DE26B8}|Example.Common.dll;{0e9e6590-1742-4b76-8531-37bad1b20a38}|API_Logic.dll;"
+		ProjectReferences = "{8e04b332-18d5-4775-99f8-564af992d901}|Api.ServiceModel.dll;{06EDDA26-C145-4C05-997F-E70E23DE26B8}|Example.Common.dll;{0e9e6590-1742-4b76-8531-37bad1b20a38}|API_Logic.dll;{669409BC-7180-48F6-A851-1EEC4849022B}|Example_Models.dll;"
 		Debug.AspNetCompiler.VirtualPath = "/localhost_59029"
 		Debug.AspNetCompiler.PhysicalPath = "Example_API\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_59029\"
@@ -32,6 +32,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example.Common", "Common\Ex
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API_Logic", "Example_API\API_Logic\API_Logic.csproj", "{0E9E6590-1742-4B76-8531-37BAD1B20A38}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example_Models", "Example_Models\Example_Models.csproj", "{669409BC-7180-48F6-A851-1EEC4849022B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -54,6 +56,10 @@ Global
 		{0E9E6590-1742-4B76-8531-37BAD1B20A38}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0E9E6590-1742-4B76-8531-37BAD1B20A38}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0E9E6590-1742-4B76-8531-37BAD1B20A38}.Release|Any CPU.Build.0 = Release|Any CPU
+		{669409BC-7180-48F6-A851-1EEC4849022B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{669409BC-7180-48F6-A851-1EEC4849022B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{669409BC-7180-48F6-A851-1EEC4849022B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{669409BC-7180-48F6-A851-1EEC4849022B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

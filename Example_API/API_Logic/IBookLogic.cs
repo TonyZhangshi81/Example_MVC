@@ -1,9 +1,5 @@
-﻿using API_Logic.Entities;
-using System;
+﻿using Example_Models.Entities;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace API_Logic
 {
